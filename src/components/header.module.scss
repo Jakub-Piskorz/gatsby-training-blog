@@ -1,0 +1,24 @@
+.nav {
+  color: #666666;
+  ul {
+    display: flex;
+    margin-left: 0;
+    li {
+      list-style-type: none;
+      margin-right: 20px;
+    }
+  }
+}
+.link {
+  text-decoration: none;
+  color: #999999;
+  transition: 0.3s;
+  :hover {
+    color: #333333;
+  }
+}
+.link-active {
+  text-decoration: none;
+  color: #333333;
+  transition: 0.3s;
+}
