@@ -32,7 +32,7 @@ const Header = () => {
             <Link
               className={headerStyles.link}
               activeClassName={headerStyles.linkActive}
-              to="/articles"
+              to="/Articles"
             >
               Articles
             </Link>
@@ -41,7 +41,7 @@ const Header = () => {
             <Link
               className={headerStyles.link}
               activeClassName={headerStyles.linkActive}
-              to="/about"
+              to="/About"
             >
               About
             </Link>
