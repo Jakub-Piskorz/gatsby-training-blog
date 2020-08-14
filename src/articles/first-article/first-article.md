@@ -6,8 +6,8 @@ author: Jakub Piskorz
 
 ## Hello World!
 
-Hi! I'm Qbek! Today I'll:
+Hi! I'm Jakub! Today I'll:
 
 1. Do nothing
-2. Do nothing
+2. Code
 3. Sleep
