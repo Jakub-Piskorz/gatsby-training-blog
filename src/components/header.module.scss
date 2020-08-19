@@ -1,0 +1,21 @@
+.nav {
+  ul {
+    display: flex;
+    list-style: none;
+    margin-left: 20px;
+    li {
+      display: inline;
+      padding-right: 25px;
+      text-decoration: none;
+      font-family: "Segoe UI";
+    }
+  }
+}
+
+.link {
+  color: lightgray;
+  text-decoration: none;
+}
+.link-active {
+  color: grey;
+}

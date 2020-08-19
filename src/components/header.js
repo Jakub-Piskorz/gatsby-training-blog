@@ -1,42 +1,58 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
+import { useStaticQuery, graphql, Link } from "gatsby"
+import headerModule from "./header.module.scss"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+const Header = () => {
+  const {
+    site: {
+      siteMetadata: { title },
+    },
+  } = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `)
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
+  return (
+    <header>
+      <h2>{title}</h2>
+      <nav className={headerModule.nav}>
+        <ul>
+          <li>
+            <Link
+              activeClassName={headerModule.linkActive}
+              className={headerModule.link}
+              to="/"
+            >
+              HOME
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeClassName={headerModule.linkActive}
+              className={headerModule.link}
+              to="/blog"
+            >
+              BLOG
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeClassName={headerModule.linkActive}
+              className={headerModule.link}
+              to="/about"
+            >
+              ABOUT
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  )
 }
 
 export default Header

@@ -66,4 +66,13 @@ yarn-error.log
 .pnp/
 .pnp.js
 # Yarn Integrity file
+
 .yarn-integrity
+**/*.un~
+**/.DS_Store
+**/.gitignore
+**/.npmignore
+**/.babelrc
+**/yarn.lock
+**/node_modules
+../**/dist/**
