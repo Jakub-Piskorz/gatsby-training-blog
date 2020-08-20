@@ -1,42 +1,69 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
+import { useStaticQuery, graphql, Link } from "gatsby"
+import "./layout.scss"
+import Modules from "./layout.module.scss"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+const Header = props => {
+  const {
+    site: {
+      siteMetadata: { title },
+    },
+  } = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `)
+  const _title = props.title || title
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
+  return (
+    <header>
+      <h1>{_title}</h1>
+      <nav>
+        <ul className={Modules.ul}>
+          <li>
+            <Link
+              activeClassName={Modules.activeLink}
+              className={Modules.link}
+              to="/"
+            >
+              HOME
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeClassName={Modules.activeLink}
+              className={Modules.link}
+              to="/blog"
+            >
+              BLOG
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeClassName={Modules.activeLink}
+              className={Modules.link}
+              to="/about"
+            >
+              ABOUT
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeClassName={Modules.activeLink}
+              className={Modules.link}
+              to="/contact"
+            >
+              CONTACT
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  )
 }
 
 export default Header
