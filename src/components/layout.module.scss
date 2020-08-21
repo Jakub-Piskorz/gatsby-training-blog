@@ -16,3 +16,14 @@
 .active-link {
   color: #c04cee;
 }
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 1300px;
+  padding: 40px;
+  min-height: 100vh;
+}
+.inner-container {
+  flex-grow: 1;
+}
