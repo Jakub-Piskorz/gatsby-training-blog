@@ -9,7 +9,7 @@ const About = () => {
         Hi! My name is Jacob. I'm former marketing specialist and currently an
         aspiring React Developer.
         <br />
-        You can see my work
+        You can see my work{" "}
         <Link to="http://jakubpiskorz.pl">on my website</Link> and also on my{" "}
         <Link to="https://github.com/Jakub-Piskorz">Github</Link>
       </p>

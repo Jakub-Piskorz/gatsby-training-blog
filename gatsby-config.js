@@ -7,15 +7,25 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
+    `gatsby-plugin-sass`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images`,
+        path: `${__dirname}/src/blogs/`,
       },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          { resolve: `gatsby-remark-relative-images` },
+          { resolve: `gatsby-remark-images`, options: { maxWidth: 1300 } },
+        ],
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

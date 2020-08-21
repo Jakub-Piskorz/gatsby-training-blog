@@ -4,7 +4,7 @@ import Layout from "../components/layout"
 
 const Contact = () => {
   return (
-    <Layout>
+    <Layout title="Contact me!">
       <p>Phone number: +48 698 497 193</p>
       <p>
         e-mail address:{" "}
