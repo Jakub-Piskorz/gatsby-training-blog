@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+//default
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -59,10 +64,6 @@ strong {
 }
 dfn {
   font-style: italic;
-}
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
 }
 mark {
   background-color: #ff0;
@@ -619,4 +620,11 @@ pre tt:after {
   html {
     font-size: 100%;
   }
+}
+
+//custom
+
+//custom
+h1 {
+  @apply text-3xl mb-2;
 }
