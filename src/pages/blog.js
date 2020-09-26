@@ -1,39 +1,60 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { Link, graphql, useStaticQuery } from "gatsby"
 import Layout from "../components/layout"
 import BlogStyle from "./blog.module.scss"
 
 const Blog = props => {
   //  URL search query goes to searchObject.
   //  www.example.com/blog?name=jacob&age=25 -> {name: "jacob", age: "25"}
-  let search = props.location.search
+  const search = props.location.search
     .slice(1)
     .split(/&/g)
     .map(x => x.split(/=/g))
-  let searchObject = {}
-  search.forEach(x => (searchObject[x[0]] = x[1]))
-  let filter = ""
-  if (
-    searchObject.hasOwnProperty("author") ||
-    searchObject.hasOwnProperty("date") ||
-    searchObject.hasOwnProperty("title")
+  let _tempSearchObject = {}
+  let searchObject = {
+    author: "",
+    date: "",
+    title: "",
+  }
+  search.map(x => (_tempSearchObject[x[0]] = x[1]))
+  for (let key in _tempSearchObject) {
+    if (key === "author" || key === "date" || key === "title")
+      searchObject[key] = _tempSearchObject[key]
+        .toLowerCase()
+        .replaceAll("%20", " ")
+  }
+  const data = useStaticQuery(graphql`
+    query {
+      allMarkdownRemark {
+        edges {
+          node {
+            frontmatter {
+              author
+              date
+              title
+            }
+            fields {
+              slug
+            }
+          }
+        }
+      }
+    }
+  `)
+  // Now "filteredBlogs" will filter graphql "data" through "searchObject"
+  // and filter out nodes that don't fit search params
+  const filteredBlogs = data.allMarkdownRemark.edges.filter(
+    edge =>
+      edge.node.frontmatter.author.toLowerCase().search(searchObject.author) >
+        -1 &&
+      edge.node.frontmatter.date.toLowerCase().search(searchObject.date) > -1 &&
+      edge.node.frontmatter.title.toLowerCase().search(searchObject.title) > -1
   )
-    filter =
-      `(filter: {frontmatter: {` +
-      (searchObject.hasOwnProperty("author")
-        ? 'author: { regex: "/' + searchObject.author + '/ig"}, '
-        : "") +
-      (searchObject.hasOwnProperty("date")
-        ? 'date: { regex: "/' + searchObject.date + '/ig"}, '
-        : "") +
-      (searchObject.hasOwnProperty("title")
-        ? 'title: { regex: "/' + searchObject.title + '/ig"}, '
-        : "") +
-      `}})`
+
   return (
     <Layout title="Blog">
-      {console.log(filter)}
-      {props.data.allMarkdownRemark.edges.map((edge, i) => {
+      {/* This will render all blogs*/}
+      {filteredBlogs.map((edge, i) => {
         return (
           <Link
             to={"/" + edge.node.fields.slug}
@@ -49,24 +70,4 @@ const Blog = props => {
     </Layout>
   )
 }
-
-export const PageQuery = graphql`
-  query {
-    allMarkdownRemark {
-      edges {
-        node {
-          frontmatter {
-            author
-            date
-            title
-          }
-          fields {
-            slug
-          }
-        }
-      }
-    }
-  }
-`
-
 export default Blog

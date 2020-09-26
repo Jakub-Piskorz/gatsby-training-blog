@@ -41,14 +41,24 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `)
+  const blog = await graphql(`
+    query {
+      sitePage(path: { regex: "/blog/gi" }) {
+        path
+      }
+    }
+  `)
 
-  const post = `${__dirname}/src/templates/post.js`
+  const postPath = `${__dirname}/src/templates/post.js`
+  const blogPath = `${__dirname}/src/pages/blog.js`
 
   markdowns.data.allMarkdownRemark.edges.map(edge => {
     createPage({
       path: edge.node.fields.slug,
-      component: post,
+      component: postPath,
       context: edge,
     })
+    // eslint-disable-next-line array-callback-return
+    return
   })
 }
